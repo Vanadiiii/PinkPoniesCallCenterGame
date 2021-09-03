@@ -7,6 +7,6 @@ import ru.ponies.pink.web.dto.UserDto;
 
 import java.util.function.Function;
 
-@Mapper(componentModel = "spring"/*, unmappedTargetPolicy = ReportingPolicy.ERROR*/)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface UserDtoMapper extends Function<UserDto, User> {
 }

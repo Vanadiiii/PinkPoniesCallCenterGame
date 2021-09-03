@@ -7,6 +7,6 @@ import ru.ponies.pink.web.dto.RoleDto;
 
 import java.util.function.Function;
 
-@Mapper(componentModel = "spring"/*, unmappedTargetPolicy = ReportingPolicy.ERROR*/)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface RoleDtoMapper extends Function<RoleDto, Role> {
 }

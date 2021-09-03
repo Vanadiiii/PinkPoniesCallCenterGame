@@ -10,8 +10,6 @@ public interface UserService {
 
     Role save(Role role);
 
-    void addToUser(String login, String roleName);
-
     User findByLogin(String login);
 
     List<User> getAll();

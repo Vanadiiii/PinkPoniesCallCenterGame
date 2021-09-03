@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class EntityOne {
-
+ 
     @Id
     private UUID id;
 }

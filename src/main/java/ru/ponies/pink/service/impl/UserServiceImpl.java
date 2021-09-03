@@ -50,17 +50,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addToUser(String login, String roleName) {
-        log.info("adding role - {} to user with login - {}", roleName, login);
-        User user = userRepository.findByLogin(login)
-                .orElseThrow(() -> UserNotFoundException.ofLogin(login));
-        Role role = roleRepository.findByName(roleName)
-                .orElseThrow(() -> RoleNotFoundException.ofName(roleName));
-
-        user.getRoles().add(role);
-    }
-
-    @Override
     public User findByLogin(String login) {
         log.info("fetching user with login - {}", login);
         return userRepository.findByLogin(login)

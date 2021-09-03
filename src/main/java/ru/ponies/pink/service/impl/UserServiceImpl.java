@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.ponies.pink.domain.entity.User;
 import ru.ponies.pink.domain.repository.UserRepository;
 import ru.ponies.pink.exception.UserNotFoundException;
+import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.service.mapper.UserDetailMapper;
-import ru.ponies.pink.service.mapper.UserService;
 
 import java.util.List;
 import java.util.UUID;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ponies.pink.domain.entity.Strategy;
-import ru.ponies.pink.service.mapper.StrategyService;
+import ru.ponies.pink.service.StrategyService;
 import ru.ponies.pink.web.dto.StrategyDto;
 
 import java.util.List;
@@ -36,14 +36,14 @@ public class StrategyController extends CrudController<UUID, StrategyDto, Strate
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<Strategy> create(StrategyDto create) {
-        return null;
+        return ResponseEntity.ok(strategyService.create(create));
     }
 
     @Override
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<Strategy> update(StrategyDto update) {
-        return null;
+        return ResponseEntity.ok(strategyService.create(update));
     }
 
     @Override

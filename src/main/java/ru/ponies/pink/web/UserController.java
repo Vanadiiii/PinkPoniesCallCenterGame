@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ponies.pink.domain.entity.User;
-import ru.ponies.pink.service.mapper.UserService;
+import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.web.dto.UserDto;
 import ru.ponies.pink.web.mapper.UserDtoMapper;
 
@@ -66,6 +66,11 @@ public class UserController extends CrudController<UUID, UserDto, User> {
     @GetMapping("/{uuid}")
     public ResponseEntity<User> get(UUID uuid) {
         throw new RuntimeException("method not support");
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(UUID uuid) {
+        return null;
     }
 
     @GetMapping("/{uuid}")

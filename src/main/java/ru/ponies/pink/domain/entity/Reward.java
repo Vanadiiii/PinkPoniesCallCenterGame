@@ -8,8 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,4 +37,8 @@ public class Reward {
     @JoinColumn(name = "strategy_id")
     private Strategy strategy;
 
+    public Reward(String rewardType, Integer value) {
+        this.rewardType = rewardType;
+        this.value = value;
+    }
 }

@@ -1,4 +1,4 @@
-package ru.ponies.pink.service.mapper;
+package ru.ponies.pink.service;
 
 import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.web.dto.StrategyDto;

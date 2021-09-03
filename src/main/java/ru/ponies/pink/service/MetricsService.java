@@ -4,6 +4,6 @@ import ru.ponies.pink.domain.entity.Metrics;
 
 public interface MetricsService {
 
-    void update(Metrics metrics);
+    void create(Metrics metrics);
 
 }

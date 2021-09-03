@@ -25,8 +25,8 @@ public class MetricsController {
     private final MetricsService metricsService;
     private final MetricsDtoMapper mapper;
     @PostMapping
-    public ResponseEntity<Void> update(@NotNull @RequestBody MetricsDto metricsDto) {
-        metricsService.update(Optional.of(metricsDto)
+    public ResponseEntity<Void> create(@NotNull @RequestBody MetricsDto metricsDto) {
+        metricsService.create(Optional.of(metricsDto)
                 .map(mapper)
                 .orElseThrow());
         return ResponseEntity.ok().build();

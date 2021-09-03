@@ -34,11 +34,11 @@ public class BasicAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String email = request.getParameter("email");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
-        log.info("user's email - {}; password - {}", email, password);
+        log.info("user's login - {}; password - {}", login, password);
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
 
         return authenticationManager.authenticate(token);
     }

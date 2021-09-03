@@ -16,7 +16,7 @@ public class SecurityProperties {
     private int expiredAtInMinutes;
     private List<String> allowedEndpoints;
     private String loginEndpoint;
-
+ 
     public String[] getAllowedEndpoints() {
         return allowedEndpoints
                 .toArray(new String[]{});

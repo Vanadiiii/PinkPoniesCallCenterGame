@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.domain.entity.User;
 import ru.ponies.pink.service.UserService;
+import ru.ponies.pink.web.dto.StrategyDto;
 import ru.ponies.pink.web.dto.UserDto;
 import ru.ponies.pink.web.mapper.UserDtoMapper;
 
 import javax.validation.constraints.NotNull;
 import javax.websocket.server.PathParam;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,52 +28,40 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/strategy")
 @PreAuthorize("isAuthenticated()")
-public class UserController extends CrudController<UUID, UserDto, User> {
-    private final UserService userService;
-    private final UserDtoMapper mapper;
+public class StrategyController extends CrudController<UUID, StrategyDto, Strategy> {
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok(userService.getAll());
+    public ResponseEntity<List<Strategy>> findAll() {
+        return ResponseEntity.ok(List.of(new Strategy()));
     }
 
     @Override
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<User> create(UserDto create) {
-        return Optional.of(create)
-                .map(mapper)
-                .map(userService::save)
-                .map(ResponseEntity::ok)
-                .orElseThrow();
+    public ResponseEntity<Strategy> create(StrategyDto create) {
+        return null;
     }
 
     @Override
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<User> update(@NotNull @RequestBody UserDto update) {
+    public ResponseEntity<Strategy> update(StrategyDto update) {
         return null;
     }
 
     @Override
     @PatchMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<User> patch(@NotNull @RequestBody UserDto update) {
+    public ResponseEntity<Strategy> patch(StrategyDto update) {
         return null;
     }
 
     @Override
     @GetMapping("/{uuid}")
-    public ResponseEntity<User> get(UUID uuid) {
-        throw new RuntimeException("method not support");
-    }
-
-    @GetMapping("/{uuid}")
-    public ResponseEntity<User> get(@PathVariable("uuid") UUID uuid, Principal principal) {
+    public ResponseEntity<Strategy> get(@PathVariable("uuid") UUID uuid) {
         return null;
     }
-
 
 }

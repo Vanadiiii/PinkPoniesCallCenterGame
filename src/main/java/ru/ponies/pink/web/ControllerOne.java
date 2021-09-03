@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ponies.pink.domain.entity.EntityOne;
-import ru.ponies.pink.service.MessageDispatcher;
-import ru.ponies.pink.service.ProcessManager;
 import ru.ponies.pink.service.ServiceOne;
 import ru.ponies.pink.service.ServiceThree;
 import ru.ponies.pink.service.ServiceTwo;
@@ -22,8 +20,6 @@ public class ControllerOne {
     private final ServiceOne serviceOne;
     private final ServiceTwo serviceTwo;
     private final ServiceThree serviceThree;
-    private final MessageDispatcher messageDispatcher;
-    private final ProcessManager processManager;
 
     private final MapperDtoOne mapperDtoOne;
     private final MapperDtoTwo mapperDtoTwo;

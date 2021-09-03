@@ -18,8 +18,6 @@ public class ControllerThree {
     private final ServiceOne serviceOne;
     private final ServiceTwo serviceTwo;
     private final ServiceThree serviceThree;
-    private final MessageDispatcher messageDispatcher;
-    private final ProcessManager processManager;
 
     private final MapperDtoOne mapperDtoOne;
     private final MapperDtoTwo mapperDtoTwo;

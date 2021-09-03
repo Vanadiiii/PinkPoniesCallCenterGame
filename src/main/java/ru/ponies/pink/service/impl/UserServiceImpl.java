@@ -18,6 +18,7 @@ import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.service.mapper.UserDetailMapper;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -25,15 +26,14 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final UserDetailMapper userDetailMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByLogin(email)
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        return userRepository.findByLogin(login)
                 .map(userDetailMapper)
-                .orElseThrow(() -> new UsernameNotFoundException("Can't find user with email - " + email));
+                .orElseThrow(() -> new UsernameNotFoundException("Can't find user with email - " + login));
     }
 
     @Override
@@ -44,15 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Role save(Role role) {
-        log.info("saving role {}", role);
-        return roleRepository.save(role);
-    }
-
-    @Override
-    public User findByLogin(String login) {
+    public User findByLogin(UUID id, String login) {
         log.info("fetching user with login - {}", login);
-        return userRepository.findByLogin(login)
+        return userRepository.findByIdAndLogin(id, login)
                 .orElseThrow(() -> UserNotFoundException.ofLogin(login));
     }
 

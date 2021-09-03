@@ -54,14 +54,14 @@ public class UserController extends CrudController<UUID, UserDto, User> {
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<User> update(@NotNull @RequestBody UserDto update) {
-        return null;
+        throw new RuntimeException("method not support");
     }
 
     @Override
     @PatchMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<User> patch(@NotNull @RequestBody UserDto update) {
-        return null;
+        throw new RuntimeException("method not support");
     }
 
     @Override
@@ -72,7 +72,9 @@ public class UserController extends CrudController<UUID, UserDto, User> {
 
     @GetMapping("/{uuid}")
     public ResponseEntity<User> get(@PathVariable("uuid") UUID uuid, Principal principal) {
-        return null;
+        return Optional.of(userService.findByLogin(uuid, principal.getName()))
+                .map(ResponseEntity::ok)
+                .orElseThrow();
     }
 
 

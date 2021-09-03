@@ -1,4 +1,4 @@
-package ru.ponies.pink.service;
+package ru.ponies.pink.service.mapper;
 
 import ru.ponies.pink.domain.entity.Metrics;
 

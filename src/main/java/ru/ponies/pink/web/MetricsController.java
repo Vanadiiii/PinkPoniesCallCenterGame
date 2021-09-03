@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ponies.pink.service.MetricsService;
+import ru.ponies.pink.service.mapper.MetricsService;
 import ru.ponies.pink.web.dto.MetricsDto;
 import ru.ponies.pink.web.mapper.MetricsDtoMapper;
 

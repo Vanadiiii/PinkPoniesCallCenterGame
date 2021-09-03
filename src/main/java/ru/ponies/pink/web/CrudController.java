@@ -16,6 +16,8 @@ public abstract class CrudController<ID, T, R> {
 
     public abstract ResponseEntity<R> get(ID id);
 
+    public abstract ResponseEntity<Void> delete(ID id);
+
 //    ROLE_ADMIN,
 //    ROLE_OPERATOR,
 //    ROLE_SHOP_MANAGER,

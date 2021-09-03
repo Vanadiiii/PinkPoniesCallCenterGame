@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,12 +31,12 @@ public class Strategy {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @OneToMany(mappedBy = "strategy")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "strategy")
     private List<Reward> reward;
 
     @ManyToOne
     private Subject subject;
 
-    @OneToMany(mappedBy = "strategy")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "strategy")
     private List<Condition> conditions;
 }

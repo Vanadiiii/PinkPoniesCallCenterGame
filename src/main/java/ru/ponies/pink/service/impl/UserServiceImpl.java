@@ -8,15 +8,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ponies.pink.domain.entity.Role;
 import ru.ponies.pink.domain.entity.User;
-import ru.ponies.pink.domain.repository.RoleRepository;
 import ru.ponies.pink.domain.repository.UserRepository;
-import ru.ponies.pink.exception.RoleNotFoundException;
 import ru.ponies.pink.exception.UserNotFoundException;
-import ru.ponies.pink.security.enums.RoleType;
-import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.service.mapper.UserDetailMapper;
+import ru.ponies.pink.service.mapper.UserService;
 
 import java.util.List;
 import java.util.UUID;

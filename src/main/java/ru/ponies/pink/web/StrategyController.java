@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ponies.pink.domain.entity.Strategy;
-import ru.ponies.pink.service.StrategyService;
+import ru.ponies.pink.service.mapper.StrategyService;
 import ru.ponies.pink.web.dto.StrategyDto;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class StrategyController extends CrudController<UUID, StrategyDto, Strate
 
     @GetMapping
     public ResponseEntity<List<Strategy>> findAll() {
-        return ResponseEntity.ok(List.of(new Strategy()));
+        return ResponseEntity.ok(strategyService.findAll());
     }
 
     @Override
@@ -47,8 +47,6 @@ public class StrategyController extends CrudController<UUID, StrategyDto, Strate
     }
 
     @Override
-    @PatchMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<Strategy> patch(StrategyDto update) {
         return null;
     }
@@ -56,7 +54,14 @@ public class StrategyController extends CrudController<UUID, StrategyDto, Strate
     @Override
     @GetMapping("/{uuid}")
     public ResponseEntity<Strategy> get(@PathVariable("uuid") UUID uuid) {
-        return null;
+        return ResponseEntity.ok(strategyService.getById(uuid));
+    }
+
+    @Override
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable("uuid") UUID uuid) {
+        strategyService.deleteById(uuid);
+        return ResponseEntity.ok().build();
     }
 
 }

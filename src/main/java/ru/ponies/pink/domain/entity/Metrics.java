@@ -1,7 +1,7 @@
 package ru.ponies.pink.domain.entity;
 
 import lombok.*;
-import org.springframework.jmx.support.MetricType;
+import ru.ponies.pink.domain.enums.MetricsType;
 
 import java.util.Map;
 import java.util.UUID;
@@ -14,6 +14,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Metrics {
     private UUID subjectId;
-    private MetricType type;
+    private MetricsType type;
     private Map<String, String> metrics;
 }

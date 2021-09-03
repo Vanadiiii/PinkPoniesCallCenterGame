@@ -16,7 +16,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ServiceTwoImpl implements ServiceTwo {
 
-    private final ServiceOne serviceOne;
     private final ServiceThree serviceThree;
 
     private final EntityOneRepository entityOneRepository;

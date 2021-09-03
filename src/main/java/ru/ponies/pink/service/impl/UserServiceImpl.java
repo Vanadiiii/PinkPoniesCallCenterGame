@@ -14,6 +14,7 @@ import ru.ponies.pink.domain.repository.RoleRepository;
 import ru.ponies.pink.domain.repository.UserRepository;
 import ru.ponies.pink.exception.RoleNotFoundException;
 import ru.ponies.pink.exception.UserNotFoundException;
+import ru.ponies.pink.security.enums.RoleType;
 import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.service.mapper.UserDetailMapper;
 

@@ -7,14 +7,14 @@ import ru.ponies.pink.domain.repository.EntityThreeRepository;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceOne;
 import ru.ponies.pink.service.ServiceThree;
-import ru.ponies.pink.service.ServiceTwo;
+import ru.ponies.pink.service.StrategyService;
 
 @Component
 @RequiredArgsConstructor
 public class DelegateThree {
 
     private final ServiceOne serviceOne;
-    private final ServiceTwo serviceTwo;
+    private final StrategyService strategyService;
     private final ServiceThree serviceThree;
 
     private final EntityOneRepository entityOneRepository;

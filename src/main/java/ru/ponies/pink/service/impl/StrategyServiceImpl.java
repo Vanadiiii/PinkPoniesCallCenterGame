@@ -5,7 +5,7 @@ import ru.ponies.pink.domain.repository.EntityOneRepository;
 import ru.ponies.pink.domain.repository.EntityThreeRepository;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceThree;
-import ru.ponies.pink.service.ServiceTwo;
+import ru.ponies.pink.service.StrategyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +13,13 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class ServiceTwoImpl implements ServiceTwo {
+public class StrategyServiceImpl implements StrategyService {
 
-    private final ServiceThree serviceThree;
-
-    private final EntityOneRepository entityOneRepository;
     private final StrategyRepository strategyRepository;
-    private final EntityThreeRepository entityThreeRepository;
 
     @Override
     public Strategy get(UUID id) {
-        return null;
+        return strategyRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -33,7 +29,7 @@ public class ServiceTwoImpl implements ServiceTwo {
 
     @Override
     public void delete(UUID id) {
-
+        strategyRepository.deleteById(id);
     }
 
     @Override

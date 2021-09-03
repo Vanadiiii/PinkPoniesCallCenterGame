@@ -4,7 +4,7 @@ import ru.ponies.pink.domain.entity.Strategy;
 
 import java.util.UUID;
 
-public interface ServiceTwo {
+public interface StrategyService {
 
     Strategy get(UUID id);
 

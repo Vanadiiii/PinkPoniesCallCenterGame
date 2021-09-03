@@ -9,20 +9,13 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ponies.pink.domain.entity.Strategy;
-import ru.ponies.pink.domain.entity.User;
-import ru.ponies.pink.service.UserService;
+import ru.ponies.pink.service.StrategyService;
 import ru.ponies.pink.web.dto.StrategyDto;
-import ru.ponies.pink.web.dto.UserDto;
-import ru.ponies.pink.web.mapper.UserDtoMapper;
 
-import javax.validation.constraints.NotNull;
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -31,6 +24,8 @@ import java.util.UUID;
 @RequestMapping("/api/strategy")
 @PreAuthorize("isAuthenticated()")
 public class StrategyController extends CrudController<UUID, StrategyDto, Strategy> {
+
+    private final StrategyService strategyService;
 
     @GetMapping
     public ResponseEntity<List<Strategy>> findAll() {

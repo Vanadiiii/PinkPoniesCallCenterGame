@@ -28,6 +28,9 @@ public class Strategy {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
+
+    private UUID subjectId;
+
     @OneToMany(mappedBy = "strategy")
     private List<Reward> reward;
 

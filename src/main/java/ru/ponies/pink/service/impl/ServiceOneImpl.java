@@ -7,7 +7,7 @@ import ru.ponies.pink.domain.repository.EntityOneRepository;
 import ru.ponies.pink.domain.repository.EntityThreeRepository;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceOne;
-import ru.ponies.pink.service.ServiceTwo;
+import ru.ponies.pink.service.StrategyService;
 
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ServiceOneImpl implements ServiceOne {
 
-    private final ServiceTwo serviceTwo;
+    private final StrategyService strategyService;
 
     private final EntityOneRepository entityOneRepository;
     private final StrategyRepository strategyRepository;

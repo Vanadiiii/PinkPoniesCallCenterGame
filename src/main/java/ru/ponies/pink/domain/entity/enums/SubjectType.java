@@ -1,4 +1,4 @@
-package ru.ponies.pink.domain.enums;
+package ru.ponies.pink.domain.entity.enums;
 
 public enum SubjectType {
     SINGLE,

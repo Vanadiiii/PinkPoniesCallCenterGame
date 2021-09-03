@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import ru.ponies.pink.domain.enums.SubjectType;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,12 +30,9 @@ public class Strategy {
     @Type(type = "uuid-char")
     private UUID id;
 
-    private UUID subjectId;
-
     @OneToMany(mappedBy = "strategy")
     private List<Reward> reward;
-    @Column(name = "subject_type")
-    private SubjectType subjectType;
+
     @ManyToOne
     private Subject subject;
 

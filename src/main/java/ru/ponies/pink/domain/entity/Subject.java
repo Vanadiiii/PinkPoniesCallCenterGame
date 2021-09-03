@@ -2,7 +2,7 @@ package ru.ponies.pink.domain.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import ru.ponies.pink.domain.enums.SubjectType;
+import ru.ponies.pink.domain.entity.enums.SubjectType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

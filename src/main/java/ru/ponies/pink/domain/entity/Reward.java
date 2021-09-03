@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import ru.ponies.pink.domain.entity.enums.RewardType;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,8 +30,9 @@ public class Reward {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
-    @Enumerated(EnumType.STRING)
-    private RewardType rewardType;
+
+    private String rewardType;
+
     private Integer value;
 
     @ManyToOne

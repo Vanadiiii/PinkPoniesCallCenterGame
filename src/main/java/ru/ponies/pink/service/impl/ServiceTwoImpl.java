@@ -1,10 +1,9 @@
 package ru.ponies.pink.service.impl;
 
-import ru.ponies.pink.domain.entity.EntityTwo;
+import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.domain.repository.EntityOneRepository;
 import ru.ponies.pink.domain.repository.EntityThreeRepository;
-import ru.ponies.pink.domain.repository.EntityTwoRepository;
-import ru.ponies.pink.service.ServiceOne;
+import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceThree;
 import ru.ponies.pink.service.ServiceTwo;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +18,16 @@ public class ServiceTwoImpl implements ServiceTwo {
     private final ServiceThree serviceThree;
 
     private final EntityOneRepository entityOneRepository;
-    private final EntityTwoRepository entityTwoRepository;
+    private final StrategyRepository strategyRepository;
     private final EntityThreeRepository entityThreeRepository;
 
     @Override
-    public EntityTwo get(UUID id) {
+    public Strategy get(UUID id) {
         return null;
     }
 
     @Override
-    public EntityTwo update(EntityTwo entity) {
+    public Strategy update(Strategy entity) {
         return null;
     }
 
@@ -38,7 +37,7 @@ public class ServiceTwoImpl implements ServiceTwo {
     }
 
     @Override
-    public EntityTwo create(EntityTwo entity) {
+    public Strategy create(Strategy entity) {
         return null;
     }
 }

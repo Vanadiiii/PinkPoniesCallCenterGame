@@ -1,6 +1,6 @@
 package ru.ponies.pink.web;
 
-import ru.ponies.pink.domain.entity.EntityTwo;
+import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.service.*;
 import ru.ponies.pink.web.mapper.MapperDtoOne;
 import ru.ponies.pink.web.mapper.MapperDtoThree;
@@ -29,12 +29,12 @@ public class ControllerTwo {
     }
 
     @PatchMapping
-    public ResponseEntity update(@RequestBody EntityTwo entityTwo) {
+    public ResponseEntity update(@RequestBody Strategy strategy) {
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody EntityTwo entityTwo) {
+    public ResponseEntity create(@RequestBody Strategy strategy) {
         return ResponseEntity.ok().build();
     }
 

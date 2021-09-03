@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.ponies.pink.domain.entity.EntityThree;
 import ru.ponies.pink.domain.repository.EntityOneRepository;
 import ru.ponies.pink.domain.repository.EntityThreeRepository;
-import ru.ponies.pink.domain.repository.EntityTwoRepository;
+import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceThree;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ServiceThreeImpl implements ServiceThree {
 
     private final EntityOneRepository entityOneRepository;
-    private final EntityTwoRepository entityTwoRepository;
+    private final StrategyRepository strategyRepository;
     private final EntityThreeRepository entityThreeRepository;
 
     @Override

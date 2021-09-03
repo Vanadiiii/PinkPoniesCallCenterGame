@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.ponies.pink.domain.repository.EntityOneRepository;
 import ru.ponies.pink.domain.repository.EntityThreeRepository;
-import ru.ponies.pink.domain.repository.EntityTwoRepository;
+import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.service.ServiceOne;
 import ru.ponies.pink.service.ServiceThree;
 import ru.ponies.pink.service.ServiceTwo;
@@ -18,6 +18,6 @@ public class DelegateThree {
     private final ServiceThree serviceThree;
 
     private final EntityOneRepository entityOneRepository;
-    private final EntityTwoRepository entityTwoRepository;
+    private final StrategyRepository strategyRepository;
     private final EntityThreeRepository entityThreeRepository;
 }

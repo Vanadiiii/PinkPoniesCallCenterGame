@@ -1,43 +1,31 @@
 package ru.ponies.pink.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.domain.enums.SubjectType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.List;
 import java.util.UUID;
 
-@Data
 @Entity
-@Table
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class Strategy {
-
+public class Subject {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
-    @OneToMany(mappedBy = "strategy")
-    private List<Reward> reward;
+    @OneToMany
+    private List<User> users;
+    @Enumerated(EnumType.STRING)
     @Column(name = "subject_type")
     private SubjectType subjectType;
-    @ManyToOne
-    private Subject subject;
-
-    @OneToMany(mappedBy = "strategy")
-    private List<Condition> conditions;
+    @OneToMany
+    private List<Strategy> strategies;
 }

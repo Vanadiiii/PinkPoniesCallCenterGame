@@ -1,6 +1,6 @@
 package ru.ponies.pink.domain.enums;
 
-public enum MetricsType {
+public enum SubjectType {
     SINGLE,
     GROUP,
     DEPARTMENT

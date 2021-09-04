@@ -1,19 +1,15 @@
 package ru.ponies.pink.domain.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,7 +27,7 @@ public class Subject {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
-    @ManyToMany(mappedBy = "subjects", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "subject_user",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

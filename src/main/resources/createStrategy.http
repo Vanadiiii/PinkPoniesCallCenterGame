@@ -9,16 +9,27 @@ login=admin&password=admin
 
 ### Authorization by token, part 2. Use token to authorize.
 POST http://localhost:8080/api/strategy
+Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
-{"id":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
-"subjectId":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
-"reward":[
-{ "key":"key", "value":"value"},
-{ "key":"key1", "value":"value1"},
-],
-"conditions":[{"metricName":"metricName", "method":"LESS", "value":"1"}]
+{
+   "id":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
+   "subjectId":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
+   "reward":
+      { "key1":"1",
+      "key2":"2",
+      "key3":"3",
+      "key4":"4"}
+
+   ,
+   "conditions":[
+      {"metricName":"metricName", "method":"LESS", "value":"1"}
+   ]
 }
 
+###
+POST http://localhost:8080/api/strategy/e5f7f895-36b1-41b9-918e-a01d0f58c77a
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 
 

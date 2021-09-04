@@ -9,6 +9,7 @@ import ru.ponies.pink.domain.entity.Subject;
 import ru.ponies.pink.domain.entity.enums.CompareMethod;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.domain.repository.SubjectRepository;
+import ru.ponies.pink.exception.EntityNotFoundException;
 import ru.ponies.pink.service.StrategyService;
 import ru.ponies.pink.service.mapper.StrategyDtoMapper;
 import ru.ponies.pink.service.mapper.StrategyPatcher;
@@ -39,13 +40,13 @@ public class StrategyServiceImpl implements StrategyService {
 
     @Override
     public Strategy create(StrategyDto strategyDto) {
-        Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow();
+        Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow(()->EntityNotFoundException.forSubject.apply(strategyDto.getSubjectId()));
         return strategyRepository.save(strategyDtoMapper.map(strategyDto, subject));
     }
 
     @Override
     public Strategy update(StrategyDto strategyDto) {
-        Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow();
+        Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow(()->EntityNotFoundException.forSubject.apply(strategyDto.getSubjectId()));
         Strategy newStrategy = strategyDtoMapper.map(strategyDto, subject);
         Strategy oldStrategy = strategyRepository.findById(strategyDto.getId()).orElse(Strategy.builder().build());
         strategyPatcher.patch(oldStrategy, newStrategy);

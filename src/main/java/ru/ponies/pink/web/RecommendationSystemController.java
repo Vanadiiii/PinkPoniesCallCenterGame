@@ -20,13 +20,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/recommendation")
 @PreAuthorize("isAuthenticated()")
-public class RecomendationSystemController {
+public class RecommendationSystemController {
 
     final private RecommendationSystem recommendationSystem;
 
-    @GetMapping
-    public ResponseEntity<Strategy> create(@NotNull @RequestBody UUID id) {
+    @GetMapping("/{subjectId}")
+    public ResponseEntity<Strategy> recommend(@PathVariable UUID subjectId) {
 
-        return ResponseEntity.ok(recommendationSystem.recommend(id));
+        return ResponseEntity.ok(recommendationSystem.recommend(subjectId));
     }
 }

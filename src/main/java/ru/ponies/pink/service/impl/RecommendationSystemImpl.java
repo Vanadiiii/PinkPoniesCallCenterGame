@@ -141,7 +141,7 @@ public class RecommendationSystemImpl implements RecommendationSystem {
     }
 
     private StatisticsPair findMinDeviation(Map<String, Double> typeAverageRewards, Map<String, Double> subjectRewards) {
-        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().collect(Collectors.minBy(Comparator.comparingDouble(x -> x.getValue()))).orElseThrow();
+        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElseThrow();
         Double averageValue = typeAverageRewards.get(entry.getKey());
         StatisticsPair minRewardDeviation = new StatisticsPair(entry.getKey(), 0.0);
 

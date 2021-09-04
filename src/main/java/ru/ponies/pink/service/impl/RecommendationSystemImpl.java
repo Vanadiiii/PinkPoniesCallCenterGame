@@ -119,7 +119,17 @@ public class RecommendationSystemImpl implements RecommendationSystem {
                 }
             }
         }
-        return max;
+        if (max == null){
+            if (!strategies.isEmpty()){
+                return strategies.get(0);
+            }
+            else{
+                return max;
+            }
+        }
+        else {
+            return max;
+        }
     }
 
 

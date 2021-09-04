@@ -17,7 +17,7 @@ public interface StrategyDtoMapper {
 
     @Mapping(target = "reward", source = "dto.reward", qualifiedByName = "mapReward")
     @Mapping(target = "subject", source = "subject")
-    @Mapping(target = "conditions", source = "dto.conditions")
+    @Mapping(target = "condIntegeritions", source = "dto.conditions")
     @Mapping(target = "id", source = "dto.id")
     Strategy map(StrategyDto dto, Subject subject);
 

@@ -33,3 +33,9 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
+###
+GET http://localhost:8080/api/users/
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+

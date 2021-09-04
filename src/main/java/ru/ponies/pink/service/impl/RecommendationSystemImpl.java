@@ -82,7 +82,7 @@ public class RecommendationSystemImpl implements RecommendationSystem {
 
     @Override
     public Strategy recommend(UUID id) {
-        Subject subject = subjectRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Subject subject = subjectRepository.findById(id).orElseThrow(() -> EntityNotFoundException.forSubject.apply(id));
         Map<String, Double> typeAverageRewards = getAverageStatisticsBySubjectType(subject.getSubjectType());
         Map<String, Double> subjectRewards = getStatisticsBySubject(subject);
 

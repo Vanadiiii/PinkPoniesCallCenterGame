@@ -1,5 +1,6 @@
 package ru.ponies.pink.service;
 
+import ru.ponies.pink.domain.entity.Metrics;
 import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.web.dto.StrategyDto;
 
@@ -16,4 +17,6 @@ public interface StrategyService {
     List<Strategy> findAll();
 
     void deleteById(UUID strategyId);
+
+    boolean updateStatistic(Metrics metrics);
 }

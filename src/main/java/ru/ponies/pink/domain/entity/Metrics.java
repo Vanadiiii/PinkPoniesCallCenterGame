@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,5 +20,5 @@ import java.util.UUID;
 public class Metrics {
     private UUID subjectId;
     private SubjectType type;
-    private Map<String, String> metrics;
+    private Map<String, BigDecimal> metrics;
 }

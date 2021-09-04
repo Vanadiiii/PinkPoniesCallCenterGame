@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -34,7 +35,7 @@ public class Condition {
     private String metricName;
     @Enumerated(EnumType.STRING)
     private CompareMethod method;
-    private String value;
+    private BigDecimal value;
 
     @ManyToOne
     @JoinColumn(name = "strategy_id")

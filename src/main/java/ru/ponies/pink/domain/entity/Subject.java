@@ -1,5 +1,8 @@
 package ru.ponies.pink.domain.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Data
 public class Subject {
     @Id
     @GeneratedValue(generator = "uuid")

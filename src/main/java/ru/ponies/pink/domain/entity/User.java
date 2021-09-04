@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.security.enums.RoleType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -43,7 +44,7 @@ public class User {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private RoleType role;
-    @ManyToMany
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     @JoinTable(name = "subject_user",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))

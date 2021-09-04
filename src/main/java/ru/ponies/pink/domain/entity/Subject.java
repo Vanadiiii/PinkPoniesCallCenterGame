@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,7 +27,7 @@ public class Subject {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
-    @ManyToMany
+    @ManyToMany(mappedBy = "subjects", cascade = CascadeType.PERSIST)
     @JoinTable(name = "subject_user",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

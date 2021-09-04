@@ -11,5 +11,5 @@ import ru.ponies.pink.domain.entity.enums.CompareMethod;
 public class ConditionDto {
     String metricName;
     CompareMethod method;
-    String value;
+    Integer value;
 }

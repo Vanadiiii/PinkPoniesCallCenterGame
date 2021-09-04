@@ -13,8 +13,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -37,7 +35,6 @@ public class Condition {
     private CompareMethod method;
     private BigDecimal value;
 
-    @ManyToOne
-    @JoinColumn(name = "strategy_id")
-    private Strategy strategy;
+    @Type(type = "uuid-char")
+    private UUID strategy;
 }

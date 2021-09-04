@@ -10,8 +10,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.UUID;
 
@@ -33,9 +31,8 @@ public class Reward {
 
     private Integer value;
 
-    @ManyToOne
-    @JoinColumn(name = "strategy_id")
-    private Strategy strategy;
+    @Type(type = "uuid-char")
+    private UUID strategy;
 
     public Reward(String rewardType, Integer value) {
         this.rewardType = rewardType;

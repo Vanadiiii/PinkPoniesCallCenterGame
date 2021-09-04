@@ -6,6 +6,7 @@ import ru.ponies.pink.domain.entity.Condition;
 import ru.ponies.pink.domain.entity.Metrics;
 import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.domain.entity.Subject;
+import ru.ponies.pink.domain.entity.enums.CompareMethod;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.domain.repository.SubjectRepository;
 import ru.ponies.pink.service.StrategyService;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -65,13 +67,13 @@ public class StrategyServiceImpl implements StrategyService {
         Subject subject = subjectRepository.findById(metrics.getSubjectId())
                 .orElseThrow();
         final var mat2metric = metrics.getMetrics();
-        //to get completed ids
+        //to get Conditions completed ids
         final List<UUID> conditionComplete = subject.getStrategies().stream()
-                .filter(it->it.getIsComplete()==null || !it.getIsComplete())
+                .filter(it -> it.getIsComplete() == null || !it.getIsComplete())
                 .map(Strategy::getConditions)
                 .flatMap(Collection::stream)
                 .filter(it -> mat2metric.containsKey(it.getMetricName()))
-                .filter(it -> compareToValue(mat2metric.get(it.getMetricName())).test(it))
+                .filter(it -> compareToValue.test(it, mat2metric.get(it.getMetricName())))
                 .map(Condition::getId)
                 .collect(Collectors.toList());
 
@@ -79,7 +81,8 @@ public class StrategyServiceImpl implements StrategyService {
         for (Strategy st : subject.getStrategies()) {
             final var conditions = st.getConditions().stream().filter(it -> !conditionComplete.contains(it.getId())).collect(Collectors.toList());
             if (conditions.size() == 0) {
-                applyToSubject(st);
+                //TODO recalculate subject if necessary
+                st.setIsComplete(true);
             }
             st.setConditions(conditions);
             strategyRepository.save(st);
@@ -87,13 +90,19 @@ public class StrategyServiceImpl implements StrategyService {
         return true;
     }
 
-    private void applyToSubject(Strategy st) {
-        // TODO calculate metrics
-        st.setIsComplete(true);
-    }
 
-    private Predicate<Condition> compareToValue(BigDecimal value) {
-        return condition -> value != null && value.compareTo(condition.getValue()) >= 0;
-    }
+    private final BiPredicate<Condition, BigDecimal> compareToValue = (condition, value) -> {
+        if (value == null) {
+            return false;
+        }
+        if (CompareMethod.LESS.equals(condition.getMethod())) {
+            return value.compareTo(condition.getValue()) < 0;
+        }
+        if (CompareMethod.MORE.equals(condition.getMethod())) {
+            return value.compareTo(condition.getValue()) >= 0;
+        }
+        return false;
+    };
+
 
 }

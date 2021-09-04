@@ -2,7 +2,6 @@ package ru.ponies.pink.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import ru.ponies.pink.domain.entity.Reward;
 import ru.ponies.pink.domain.entity.Strategy;
@@ -14,13 +13,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = ConditionMapper.class)
-public interface StrategyMapper {
+public interface StrategyDtoMapper {
 
-    @Mapping(target = "reward", source = "strategyDto.reward", qualifiedByName = "mapReward")
+    @Mapping(target = "reward", source = "dto.reward", qualifiedByName = "mapReward")
     @Mapping(target = "subject", source = "subject")
-    @Mapping(target = "conditions", source = "strategyDto.conditions")
-    @Mapping(target = "id", source = "strategyDto.id")
-    Strategy map(StrategyDto strategyDto, Subject subject);
+    @Mapping(target = "conditions", source = "dto.conditions")
+    @Mapping(target = "id", source = "dto.id")
+    Strategy map(StrategyDto dto, Subject subject);
 
     @Named("mapReward")
     default List<Reward> mapReward(Map<String, String> value) {
@@ -30,7 +29,4 @@ public interface StrategyMapper {
                 .map(it -> new Reward(it.getKey(), Integer.valueOf(it.getValue())))
                 .collect(Collectors.toList());
     }
-
-    void map(@MappingTarget Strategy target, Strategy source);
-
 }

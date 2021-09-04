@@ -7,7 +7,8 @@ import ru.ponies.pink.domain.entity.Subject;
 import ru.ponies.pink.domain.repository.StrategyRepository;
 import ru.ponies.pink.domain.repository.SubjectRepository;
 import ru.ponies.pink.service.StrategyService;
-import ru.ponies.pink.service.mapper.StrategyMapper;
+import ru.ponies.pink.service.mapper.StrategyDtoMapper;
+import ru.ponies.pink.service.mapper.StrategyPatcher;
 import ru.ponies.pink.web.dto.StrategyDto;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class StrategyServiceImpl implements StrategyService {
     private final StrategyRepository strategyRepository;
     private final SubjectRepository subjectRepository;
 
-    private final StrategyMapper strategyMapper;
+    private final StrategyDtoMapper strategyDtoMapper;
+    private final StrategyPatcher strategyPatcher;
 
     @Override
     public Strategy getById(UUID strategyId) {
@@ -30,15 +32,15 @@ public class StrategyServiceImpl implements StrategyService {
     @Override
     public Strategy create(StrategyDto strategyDto) {
         Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow();
-        return strategyRepository.save(strategyMapper.map(strategyDto, subject));
+        return strategyRepository.save(strategyDtoMapper.map(strategyDto, subject));
     }
 
     @Override
     public Strategy update(StrategyDto strategyDto) {
         Subject subject = subjectRepository.findById(strategyDto.getSubjectId()).orElseThrow();
-        Strategy newStrategy = strategyMapper.map(strategyDto, subject);
+        Strategy newStrategy = strategyDtoMapper.map(strategyDto, subject);
         Strategy oldStrategy = strategyRepository.findById(strategyDto.getId()).orElse(Strategy.builder().build());
-        strategyMapper.map(oldStrategy, newStrategy);
+        strategyPatcher.patch(oldStrategy, newStrategy);
         return strategyRepository.save(oldStrategy);
     }
 

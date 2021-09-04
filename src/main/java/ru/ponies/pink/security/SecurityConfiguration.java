@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.ponies.pink.configuration.CorsFilter;
 import ru.ponies.pink.security.filter.BasicAuthenticationFilter;
 import ru.ponies.pink.security.filter.TokenAuthorizationFilter;
 
@@ -25,6 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final SecurityProperties properties;
+//    private final CorsFilter corsFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -44,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(properties.getAllowedEndpoints()).permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(basicAuthenticationFilter);
+        http.addFilterBefore(new CorsFilter(), BasicAuthenticationFilter.class);
+//        http.cors().disable();
         http.addFilterBefore(tokenAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

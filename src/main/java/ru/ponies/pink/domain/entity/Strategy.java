@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -36,6 +37,7 @@ public class Strategy {
     private List<Reward> reward;
 
     @Column(name = "is_complete")
+    @ColumnDefault("FALSE")
     private Boolean isComplete;
 
     @ManyToOne

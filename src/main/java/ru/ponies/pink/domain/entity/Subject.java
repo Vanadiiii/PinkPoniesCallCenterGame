@@ -38,6 +38,6 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     @Column(name = "subject_type")
     private SubjectType subjectType;
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<Strategy> strategies;
 }

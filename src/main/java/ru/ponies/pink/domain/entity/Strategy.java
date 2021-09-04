@@ -13,7 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
@@ -40,8 +39,8 @@ public class Strategy {
     @ColumnDefault("FALSE")
     private Boolean isComplete;
 
-    @ManyToOne
-    private Subject subject;
+    @Type(type = "uuid-char")
+    private UUID subject;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "strategy")
     private List<Condition> conditions;

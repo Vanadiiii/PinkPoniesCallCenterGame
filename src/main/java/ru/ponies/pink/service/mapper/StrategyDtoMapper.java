@@ -10,7 +10,7 @@ import ru.ponies.pink.web.dto.StrategyDto;
 public interface StrategyDtoMapper {
 
     @Mapping(target = "reward", ignore = true)
-    @Mapping(target = "subject", source = "subject")
+    @Mapping(target = "subject", source = "subject.id")
     @Mapping(target = "conditions", ignore = true)
     @Mapping(target = "id", source = "dto.id")
     Strategy map(StrategyDto dto, Subject subject);

@@ -55,6 +55,8 @@ public class StrategyServiceImpl implements StrategyService {
         final List<Condition> conditions = condition.stream().peek(it -> it.setStrategy(strategy.getId())).map(conditionRepository::save).collect(Collectors.toList());
         strategy.setReward(rewards);
         strategy.setConditions(conditions);
+        subject.getStrategies().add(strategy);
+        subjectRepository.save(subject);
         return strategy;
     }
 

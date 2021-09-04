@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 1234
-    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:call_center_game
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -11,8 +11,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        generate_statistics: true
-    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+        generate_statistics: false
+    database-platform: org.hibernate.dialect.H2Dialect
   liquibase:
     enabled: false
 
@@ -25,3 +25,8 @@ application:
                          '/swagger-resources/**', '/configuration/ui', '/configuration/security', '/webjars/**',
                          '/v2/api-docs/**' ]
     login-endpoint: '/api/login'
+
+shop:
+  url: localhost:8081
+metric:
+  url: localhost:8081

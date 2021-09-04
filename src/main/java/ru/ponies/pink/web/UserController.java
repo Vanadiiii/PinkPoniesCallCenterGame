@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,13 +64,13 @@ public class UserController extends CrudController<UUID, UserDto, User> {
     }
 
     @Override
-    @GetMapping("/{uuid}")
     public ResponseEntity<User> get(UUID uuid) {
         throw new RuntimeException("method not support");
     }
 
     @Override
-    public ResponseEntity<Void> delete(UUID uuid) {
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable("userId") UUID userId) {
         return null;
     }
 

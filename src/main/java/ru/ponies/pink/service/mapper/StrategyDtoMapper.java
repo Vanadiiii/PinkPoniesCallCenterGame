@@ -22,11 +22,11 @@ public interface StrategyDtoMapper {
     Strategy map(StrategyDto dto, Subject subject);
 
     @Named("mapReward")
-    default List<Reward> mapReward(Map<String, String> value) {
+    default List<Reward> mapReward(Map<String, Integer> value) {
         return value
                 .entrySet()
                 .stream()
-                .map(it -> new Reward(it.getKey(), Integer.valueOf(it.getValue())))
+                .map(it -> new Reward(it.getKey(), it.getValue()))
                 .collect(Collectors.toList());
     }
 }

@@ -14,6 +14,6 @@ import java.util.UUID;
 public class StrategyDto {
     private UUID id;
     private UUID subjectId;
-    private Map<String, String> reward;
+    private Map<String, Integer> reward;
     private List<ConditionDto> conditions;
 }

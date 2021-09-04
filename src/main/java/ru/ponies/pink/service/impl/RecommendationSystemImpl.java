@@ -9,6 +9,7 @@ import ru.ponies.pink.domain.entity.Strategy;
 import ru.ponies.pink.domain.entity.Subject;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
 import ru.ponies.pink.domain.repository.SubjectRepository;
+import ru.ponies.pink.exception.EntityNotFoundException;
 import ru.ponies.pink.service.RecommendationSystem;
 
 import java.util.*;
@@ -81,7 +82,7 @@ public class RecommendationSystemImpl implements RecommendationSystem {
 
     @Override
     public Strategy recommend(UUID id) {
-        Subject subject = subjectRepository.findById(id).orElseThrow();
+        Subject subject = subjectRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         Map<String, Double> typeAverageRewards = getAverageStatisticsBySubjectType(subject.getSubjectType());
         Map<String, Double> subjectRewards = getStatisticsBySubject(subject);
 
@@ -141,7 +142,7 @@ public class RecommendationSystemImpl implements RecommendationSystem {
     }
 
     private StatisticsPair findMinDeviation(Map<String, Double> typeAverageRewards, Map<String, Double> subjectRewards) {
-        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElseThrow();
+        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElseThrow(() -> new RuntimeException("No rewards"));
         Double averageValue = typeAverageRewards.get(entry.getKey());
         StatisticsPair minRewardDeviation = new StatisticsPair(entry.getKey(), 0.0);
 
@@ -154,7 +155,7 @@ public class RecommendationSystemImpl implements RecommendationSystem {
 
     private Map<String, Double> getAverageStatisticsBySubjectType(SubjectType subjectType) {
         List<Subject> subjects = subjectRepository.findBySubjectType(subjectType);
-        final Map<String, Double> averageRewardValues = subjects.stream()
+        return subjects.stream()
                 .map(this::getStatisticsBySubject)
                 .map(Map::entrySet)
                 .flatMap(Set::stream)
@@ -164,11 +165,10 @@ public class RecommendationSystemImpl implements RecommendationSystem {
                                 averagingDouble(Map.Entry::getValue)
                         )
                 );
-        return averageRewardValues;
     }
 
     private Map<String, Double> getStatisticsBySubject(Subject subject) {
-        final Map<String, Double> rewardValues = subject.getStrategies()
+        return subject.getStrategies()
                 .stream()
                 .filter(Strategy::getIsComplete)
                 .map(Strategy::getReward)
@@ -179,7 +179,6 @@ public class RecommendationSystemImpl implements RecommendationSystem {
                                 summingDouble(reward -> reward.getValue().doubleValue())
                         )
                 );
-        return rewardValues;
     }
 
     private Double fuzzyLogicModel(StatisticsPair maxDeviation, StatisticsPair minimalRewardDeviation) {

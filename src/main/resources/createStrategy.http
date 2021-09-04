@@ -1,0 +1,24 @@
+### get token
+POST http://localhost:8080/api/login
+Content-Type: application/x-www-form-urlencoded
+
+login=admin&password=admin
+
+
+> {% client.global.set("access_token", response.body.access_token); %}
+
+### Authorization by token, part 2. Use token to authorize.
+POST http://localhost:8080/api/strategy
+Authorization: Bearer {{access_token}}
+
+{"id":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
+"subjectId":"e5f7f895-36b1-41b9-918e-a01d0f58c77a",
+"reward":[
+{ "key":"key", "value":"value"},
+{ "key":"key1", "value":"value1"},
+],
+"conditions":[{"metricName":"metricName", "method":"LESS", "value":"1"}]
+}
+
+
+

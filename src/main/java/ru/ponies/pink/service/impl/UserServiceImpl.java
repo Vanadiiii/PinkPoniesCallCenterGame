@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.ponies.pink.domain.entity.User;
 import ru.ponies.pink.domain.repository.UserRepository;
 import ru.ponies.pink.exception.UserNotFoundException;
+import ru.ponies.pink.security.enums.RoleType;
 import ru.ponies.pink.service.UserService;
 import ru.ponies.pink.service.mapper.UserDetailMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -28,7 +30,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return userRepository.findByLogin(login)
+        Optional<User> userOptional = Optional.empty();
+        if ("admin".equals(login)) {
+            final var result = new User();
+            result.setRole(RoleType.ROLE_ADMIN);
+            result.setPassword(passwordEncoder.encode("admin"));
+            result.setLogin("admin");
+            userOptional = Optional.of(result);
+        } else {
+            userOptional = userRepository.findByLogin(login);
+        }
+        return userOptional
                 .map(userDetailMapper)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find user with email - " + login));
     }

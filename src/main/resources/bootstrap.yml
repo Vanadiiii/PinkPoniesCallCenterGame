@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: call-center-game
+  cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false

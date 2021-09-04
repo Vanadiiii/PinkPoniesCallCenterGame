@@ -1,9 +1,11 @@
 package ru.ponies.pink.domain.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.ponies.pink.domain.entity.enums.SubjectType;
+import ru.ponies.pink.service.impl.UserSerializer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,10 +33,11 @@ public class Subject {
     @JoinTable(name = "subject_user",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonSerialize(using = UserSerializer.class)
     private List<User> users;
     @Enumerated(EnumType.STRING)
     @Column(name = "subject_type")
     private SubjectType subjectType;
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<Strategy> strategies;
 }

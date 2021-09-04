@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/api/metrics")
 @PreAuthorize("isAuthenticated() && hasAnyRole('ROLE_BIGBROTHER')")
 public class MetricsController {

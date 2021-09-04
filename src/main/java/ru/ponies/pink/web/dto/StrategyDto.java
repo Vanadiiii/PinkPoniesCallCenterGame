@@ -1,17 +1,17 @@
 package ru.ponies.pink.web.dto;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Value
+@Data
 @Builder
 public class StrategyDto {
-    UUID id;
-    UUID subjectId;
-    Map<String, String> reward;
-    List<ConditionDto> conditions;
+    private UUID id;
+    private UUID subjectId;
+    private Map<String, String> reward;
+    private List<ConditionDto> conditions;
 }

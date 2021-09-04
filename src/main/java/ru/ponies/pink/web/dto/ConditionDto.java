@@ -1,13 +1,13 @@
 package ru.ponies.pink.web.dto;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 import ru.ponies.pink.domain.entity.enums.CompareMethod;
 
-@Value
+@Data
 @Builder
 public class ConditionDto {
-    String metricName;
-    CompareMethod method;
-    String value;
+   private String metricName;
+   private CompareMethod method;
+   private String value;
 }

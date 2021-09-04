@@ -60,6 +60,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User findById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.ofLogin(id.toString()));
+    }
+
+    @Override
     public List<User> getAll() {
         log.info("fetching all users");
         return userRepository.findAll();

@@ -89,20 +89,19 @@ public class RecommendationSystemImpl implements RecommendationSystem {
         StatisticsPair maxDeviation = findMaxDeviation(typeAverageRewards, subjectRewards);
         StatisticsPair minRewardDeviation = findMinDeviation(typeAverageRewards, subjectRewards);
         String rewardKey = null;
-        if (maxDeviation.key != null) {
-            Double value = fuzzyLogicModel(maxDeviation, minRewardDeviation);
-            if (value < 2) {
-                rewardKey = minRewardDeviation.key;
-            }
-            else {
-                rewardKey = maxDeviation.key;
+        if (minRewardDeviation != null) {
+            if (maxDeviation.key != null) {
+                Double value = fuzzyLogicModel(maxDeviation, minRewardDeviation);
+                if (value < 2) {
+                    rewardKey = minRewardDeviation.key;
+                } else {
+                    rewardKey = maxDeviation.key;
+                }
             }
         }
         else{
-            rewardKey = minRewardDeviation.key;
+            throw EntityNotFoundException.forStrategy.apply(null);
         }
-
-
 
         return findStrategyWithMaxReward(subject, rewardKey);
     }
@@ -142,15 +141,20 @@ public class RecommendationSystemImpl implements RecommendationSystem {
     }
 
     private StatisticsPair findMinDeviation(Map<String, Double> typeAverageRewards, Map<String, Double> subjectRewards) {
-        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElseThrow(() -> new RuntimeException("No rewards"));
-        Double averageValue = typeAverageRewards.get(entry.getKey());
-        StatisticsPair minRewardDeviation = new StatisticsPair(entry.getKey(), 0.0);
+        Map.Entry<String, Double> entry = typeAverageRewards.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElse(null);
+        if (entry != null) {
+            Double averageValue = typeAverageRewards.get(entry.getKey());
+            StatisticsPair minRewardDeviation = new StatisticsPair(entry.getKey(), 0.0);
 
-        if (averageValue > 0.0){
-            minRewardDeviation.value = (averageValue - entry.getValue()) / averageValue;
+            if (averageValue > 0.0) {
+                minRewardDeviation.value = (averageValue - entry.getValue()) / averageValue;
+            }
+
+            return minRewardDeviation;
         }
-
-        return minRewardDeviation;
+        else {
+            return null;
+        }
     }
 
     private Map<String, Double> getAverageStatisticsBySubjectType(SubjectType subjectType) {
